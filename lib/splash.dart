@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:template_flutter/dashboard.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class SplashState extends State<Splash> {
   void initState() {
     super.initState();
     Timer(const Duration(milliseconds: 1500), (){
-      context.go('/dashboard');
+      Navigator.push(context, MaterialPageRoute(builder: (context) => DashBoard()));
     });
   }
 
@@ -29,9 +30,7 @@ class SplashState extends State<Splash> {
       child: Scaffold(
         // ignore: prefer_const_constructors
         body: Center(
-          child: const Icon(
-            Icons.flutter_dash_sharp
-          ),
+          child: Text('스플레시'),
         ),
       ),
     

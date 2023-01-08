@@ -1,5 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:template_flutter/dashboard/exam1.dart';
+import 'package:template_flutter/dashboard/exam2.dart';
+import 'package:template_flutter/dashboard/exam3.dart';
 
+var _items = [
+  const BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Exam1',
+          ),
+  const BottomNavigationBarItem(
+            icon: Icon(Icons.text_snippet),
+            label: 'Exam2',
+          ),        
+  const BottomNavigationBarItem(
+    icon: Icon(Icons.people),
+    label: 'Exam3',
+  ),  
+];
+  
 // ignore: use_key_in_widget_constructors
 class DashBoard extends StatefulWidget {
   @override
@@ -10,11 +28,10 @@ class DashBoard extends StatefulWidget {
 
 class DashBoardState extends State<DashBoard> with TickerProviderStateMixin {
   var _currentIndex = 0;
-  late TabController _tabController;
+
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 7, vsync: this);
   }
 
   @override
@@ -25,82 +42,36 @@ class DashBoardState extends State<DashBoard> with TickerProviderStateMixin {
       },
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: const Text('DashBoard'),
         ),
-        body: Container(),
-        bottomNavigationBar: TabBar(
-          indicatorColor: Colors.blue,
-          labelColor: Colors.blue,
-          unselectedLabelColor: Colors.grey,
-          controller: _tabController,
-          isScrollable: true,
+        body: selectTab(),
+        bottomNavigationBar: BottomNavigationBar(
+          items: _items,
           onTap: (v) {
             setState(() {
               _currentIndex = v;
             });
-            
-            print(_currentIndex);
           },
-          tabs: [
-            Tab(
-              icon: Icon(Icons.abc),
-              
-            ),
-            Tab(
-              icon: Icon(Icons.abc),
-            ),
-            Tab(
-              icon: Icon(Icons.abc),
-            ),
-            Tab(
-              icon: Icon(Icons.abc),
-            ),
-            Tab(
-              icon: Icon(Icons.abc),
-            ),
-            Tab(
-              icon: Icon(Icons.abc),
-            ),
-            Tab(
-              icon: Icon(Icons.abc),
-            ),
-          ],
+          currentIndex: _currentIndex,
+          selectedItemColor: Colors.blue,
+        
         ),
-        // BottomNavigationBar(
-        //   currentIndex: _currentIndex,
-        //   selectedItemColor: Colors.blue,
-        //   onTap: (v) {
-        //     setState(() {
-        //       _currentIndex = v;
-        //     });
-        //   },
-        //   // ignore: prefer_const_literals_to_create_immutables
-        //   items: [
-        //     const BottomNavigationBarItem(
-        //         icon: Icon(
-        //           Icons.abc,
-        //         ),
-        //         label: 'Exam1'),
-        //     const BottomNavigationBarItem(
-        //         icon: Icon(
-        //           Icons.abc,
-        //         ),
-        //         label: 'Exam2'),
-        //     const BottomNavigationBarItem(
-        //         icon: Icon(
-        //           Icons.abc,
-        //         ),
-        //         label: 'Exam3'),
-        //     const BottomNavigationBarItem(
-        //         icon: Icon(
-        //           Icons.abc,
-        //         ),
-        //         label: 'Exam4'
-        //     ),
-
-        //   ],
-        // ),
       ),
     );
+  }
+
+  selectTab() {
+    switch(_currentIndex) {
+      case 0: {
+        return Exam1();
+      }
+      case 1: {
+        return Exam2();
+      }
+      case 2: {
+        return Exam3();
+      }
+    }
   }
 }

@@ -18,9 +18,6 @@ class Exam2State extends State<Exam2> {
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Exam2'),
-      ),
       body: const Center(
         child: Text('Exam2'),
       ),
