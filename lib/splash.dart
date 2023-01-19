@@ -8,15 +8,16 @@ class Splash extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return SplashState();
-  } 
+  }
 }
 
 class SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(milliseconds: 1500), (){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => DashBoard()));
+    Timer(const Duration(milliseconds: 3000), () {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => DashBoard()));
     });
   }
 
@@ -25,7 +26,7 @@ class SplashState extends State<Splash> {
     return WillPopScope(
       onWillPop: () {
         return Future.value(false);
-      }, 
+      },
       // ignore: prefer_const_constructors
       child: Scaffold(
         // ignore: prefer_const_constructors
@@ -33,7 +34,6 @@ class SplashState extends State<Splash> {
           child: Text('스플레시'),
         ),
       ),
-    
     );
   }
 }
