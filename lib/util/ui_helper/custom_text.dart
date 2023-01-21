@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
 class Custom_Text {
-  textWeight(String inText, Color inColor, double inSize, FontWeight in_Weight){
+  weightText(String inText, double inSize, FontWeight inWeight) {
     return Text(
       inText,
       style: TextStyle(
-        color: inColor,
         fontSize: inSize,
-        fontWeight: in_Weight,
+        fontWeight: inWeight,
       ),
     );
   }
-  
-  text(String inText, double inSize){
+
+  text(String inText, double inSize) {
     return Text(
       inText,
       style: TextStyle(

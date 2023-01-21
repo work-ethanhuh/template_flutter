@@ -7,6 +7,7 @@ class Login extends StatefulWidget {
 }
 
 class LoginState extends State<Login> {
+  double outWidth = 0;
   @override
   void initState() {
     // ignore: todo
@@ -15,24 +16,78 @@ class LoginState extends State<Login> {
   }
 
   @override
+  void didChangeDependencies() {
+    // ignore: todo
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    outWidth = MediaQuery.of(context).size.width;
+  }
+
+  @override
   Widget build(BuildContext context) {
     // ignore: todo
     // TODO: implement build
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            UIH().cBox.box(UIH().cTex.text('로그인', 25)),
-            UIH().cDis.divider_H(70.0),
-            UIH().cBox.rounded(UIH().cTex.text('구글', 10)),
-            UIH().cDis.divider_H(10.0),
-            UIH().cBox.rounded(UIH().cTex.text('사과', 10)),
-            UIH().cDis.divider_H(10.0),
-            UIH().cBox.rounded(UIH().cTex.text('카카', 10)),
-            UIH().cDis.divider_H(10.0),
-          ],
+    if (outWidth == 0) {
+      return Container(
+        alignment: Alignment.center,
+        // ignore: prefer_const_constructors
+        child: CircularProgressIndicator(
+          valueColor: const AlwaysStoppedAnimation(Colors.blue),
+          strokeWidth: 5.0,
         ),
-      ),
-    );
+      );
+    } else {
+      return Scaffold(
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                UIH().cDis.divider_H(10.0),
+                UIH().cBox.box(
+                    UIH().cTex.weightText('로그인', 40, FontWeight.w400),
+                    outWidth,
+                    60),
+                UIH().cDis.divider_H(70.0),
+                InkWell(
+                  onTap: () {
+                    loginSequence();
+                  },
+                  child: UIH()
+                      .cBox
+                      .rounded(UIH().cTex.text('구글', 10), outWidth, 40),
+                ),
+                UIH().cDis.divider_H(10.0),
+                InkWell(
+                  onTap: () {
+                    loginSequence();
+                  },
+                  child: UIH()
+                      .cBox
+                      .rounded(UIH().cTex.text('사과', 10), outWidth, 40),
+                ),
+                UIH().cDis.divider_H(10.0),
+                InkWell(
+                  onTap: () {
+                    loginSequence();
+                  },
+                  child: UIH()
+                      .cBox
+                      .rounded(UIH().cTex.text('카카', 10), outWidth, 40),
+                ),
+                UIH().cDis.divider_H(30.0),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+  }
+
+  checkLoginProvider() {}
+
+  loginSequence() {
+    checkLoginProvider();
   }
 }
