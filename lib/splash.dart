@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:template_flutter/dashboard.dart';
+import 'package:template_flutter/login.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -17,7 +16,7 @@ class SplashState extends State<Splash> {
     super.initState();
     Timer(const Duration(milliseconds: 3000), () {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => DashBoard()));
+          context, MaterialPageRoute(builder: (context) => Login()));
     });
   }
 

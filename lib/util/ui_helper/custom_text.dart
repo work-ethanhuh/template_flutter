@@ -13,11 +13,10 @@ class Custom_Text {
     );
   }
   
-  text(String inText, Color inColor, double inSize){
+  text(String inText, double inSize){
     return Text(
       inText,
       style: TextStyle(
-        color: inColor,
         fontSize: inSize,
       ),
     );
