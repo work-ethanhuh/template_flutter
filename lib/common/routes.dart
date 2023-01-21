@@ -6,6 +6,12 @@ import 'package:template_flutter/dashboard/exam2.dart';
 import 'package:template_flutter/dashboard/exam3.dart';
 import 'package:template_flutter/splash.dart';
 
+//---------------------------------------testing now------------//
+// Not ready, not apply, just testing now
+//---------------------------------------testing now------------//
+//---------------------------------------testing now------------//
+//---------------------------------------testing now------------//
+//---------------------------------------testing now------------//
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -36,3 +42,4 @@ final GoRouter routes = GoRouter(
     ),
   ],
 );
+//---------------------------------------testing now------------//
