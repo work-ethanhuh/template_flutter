@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -52,18 +54,20 @@ class LoginState extends State<Login> {
               children: [
                 UIH().cDis.divider_H(10.0),
                 UIH().cBox.box_H(
-                    UIH().cTex.weightText('로그인', 40, FontWeight.w400),
+                    UIH().cTex.weightText('Login', 40, FontWeight.w400),
                     currentWidth,
-                    60),
+                    100),
                 UIH().cDis.divider_H(70.0),
                 InkWell(
                   onTap: () {
-                    googleLogin().then((v){
+                    googleLogin().then((v) {
                       print(v);
-                      if(v != null) {
+                      if (v != null) {
                         print('Google Login Success!!!!');
                         Navigator.push(
-                            context, MaterialPageRoute(builder: (context) => DashBoard()));
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DashBoard()));
                       } else {
                         print('Google Login Fail!!!!');
                       }
@@ -71,26 +75,37 @@ class LoginState extends State<Login> {
                   },
                   child: UIH()
                       .cBox
-                      .rounded(UIH().cTex.text('구글', 10), currentWidth, 40),
+                      .rounded(UIH().cTex.text('Google', 10), currentWidth, 40),
                 ),
-                UIH().cDis.divider_H(10.0),
-                InkWell(
-                  onTap: () {
-                    appleLogin();
-                  },
-                  child: UIH()
-                      .cBox
-                      .rounded(UIH().cTex.text('사과', 10), currentWidth, 40),
-                ),
-                UIH().cDis.divider_H(10.0),
-                InkWell(
-                  onTap: () {
-                    loginSequence();
-                  },
-                  child: UIH()
-                      .cBox
-                      .rounded(UIH().cTex.text('카카', 10), currentWidth, 40),
-                ),
+                if (Platform.isIOS) UIH().cDis.divider_H(10.0),
+                if (Platform.isIOS)
+                  InkWell(
+                    onTap: () {
+                      appleLogin().then((v) {
+                        print(v);
+                        if (v != null) {
+                          print('Apple Login Success!!!!');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DashBoard()));
+                        } else {
+                          print('Apple Login Fail!!!!');
+                        }
+                      });
+                    },
+                    child: UIH().cBox.rounded(
+                        UIH().cTex.text('Apple', 10), currentWidth, 40),
+                  ),
+                // UIH().cDis.divider_H(10.0),
+                // InkWell(
+                //   onTap: () {
+                //     loginSequence();
+                //   },
+                //   child: UIH()
+                //       .cBox
+                //       .rounded(UIH().cTex.text('Kakao', 10), currentWidth, 40),
+                // ),
                 UIH().cDis.divider_H(30.0),
               ],
             ),
