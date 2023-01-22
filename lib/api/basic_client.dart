@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-abstract class BaseClient {
+abstract class BasicClient {
   static final basic = Dio()
     ..interceptors.add(InterceptorsWrapper(
         onRequest: onRequestInterceptor,
