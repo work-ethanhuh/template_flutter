@@ -20,7 +20,7 @@ class Custom_Box {
     );
   }
 
-  box(Widget inWidget, double inWidth, double inHeight) {
+  box_H(Widget inWidget, double inWidth, double inHeight) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Container(
@@ -28,6 +28,18 @@ class Custom_Box {
         padding: const EdgeInsets.all(10),
         width: inWidth,
         height: inHeight,
+        child: inWidget,
+      ),
+    );
+  }
+
+  box(Widget inWidget, double inWidth) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(10),
+        width: inWidth,
         child: inWidget,
       ),
     );

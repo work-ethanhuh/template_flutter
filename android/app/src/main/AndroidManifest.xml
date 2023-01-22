@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.upto.template_flutter">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="template_flutter"
         android:name="${applicationName}"

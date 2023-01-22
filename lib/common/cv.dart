@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
-class CV with ChangeNotifier {
-  bool _check = false;
- 
-  bool get check => this._check;
-  set check(bool value) => this._check = value;
-}
+class CV with ChangeNotifier {}

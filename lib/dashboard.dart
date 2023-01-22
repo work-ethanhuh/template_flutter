@@ -44,6 +44,9 @@ class DashBoardState extends State<DashBoard> with TickerProviderStateMixin {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: const Text('DashBoard'),
+          actions: [
+
+          ],
         ),
         body: selectTab(),
         bottomNavigationBar: BottomNavigationBar(

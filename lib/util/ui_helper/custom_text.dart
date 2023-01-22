@@ -12,6 +12,16 @@ class Custom_Text {
     );
   }
 
+  colorText(String inText, double inSize, Color inColor) {
+    return Text(
+      inText,
+      style: TextStyle(
+        fontSize: inSize,
+        color: inColor,
+      ),
+    );
+  }
+
   text(String inText, double inSize) {
     return Text(
       inText,
