@@ -51,7 +51,7 @@ Map<String, dynamic> _$ValidateBusinessDetailRESP_dataToJson(
     <String, dynamic>{
       'b_no': instance.b_no,
       'valid': instance.valid,
-      'status': instance.status,
+      'status': instance.status?.toJson(),
     };
 
 ValidateBusinessDetailRESP _$ValidateBusinessDetailRESPFromJson(
@@ -60,10 +60,10 @@ ValidateBusinessDetailRESP _$ValidateBusinessDetailRESPFromJson(
       valid_cnt: json['valid_cnt'] as int?,
       request_cnt: json['request_cnt'] as int?,
       status_code: json['status_code'] as String?,
-      data: json['data'] == null
-          ? null
-          : ValidateBusinessDetailRESP_data.fromJson(
-              json['data'] as Map<String, dynamic>),
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => ValidateBusinessDetailRESP_data.fromJson(
+              e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$ValidateBusinessDetailRESPToJson(
@@ -72,5 +72,5 @@ Map<String, dynamic> _$ValidateBusinessDetailRESPToJson(
       'request_cnt': instance.request_cnt,
       'valid_cnt': instance.valid_cnt,
       'status_code': instance.status_code,
-      'data': instance.data,
+      'data': instance.data?.map((e) => e.toJson()).toList(),
     };

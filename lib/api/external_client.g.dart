@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'external_request.dart';
+part of 'external_client.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'external_request.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _ExReq implements ExReq {
-  _ExReq(
+class _ExternalClient implements ExternalClient {
+  _ExternalClient(
     this._dio, {
     this.baseUrl,
   }) {

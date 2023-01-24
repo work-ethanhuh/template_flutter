@@ -1,11 +1,16 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
+import 'package:template_flutter/api/fixed_key.dart';
 
 abstract class BasicClient {
   static final basic = Dio()
     ..interceptors.add(InterceptorsWrapper(
         onRequest: onRequestInterceptor,
+        onResponse: onResponseInterceptor,
+        onError: onErrorInterceptor));
+  static final publicPortal = Dio()
+    ..interceptors.add(InterceptorsWrapper(
+        onRequest: onRequestPublicPortalInterceptor,
         onResponse: onResponseInterceptor,
         onError: onErrorInterceptor));
 
@@ -42,6 +47,20 @@ abstract class BasicClient {
 
   static void onRequestInterceptor(
       RequestOptions options, RequestInterceptorHandler handler) async {
+    print('Request API----------------------------------------------Begin!!!');
+    print('path         : ${options.baseUrl}${options.path}');
+    print('body         : ${innerParser(options.data)}');
+    print('query        : ${innerParser(options.queryParameters)}');
+    print('header       : ${options.headers}');
+    print('Request API----------------------------------------------End  !!!');
+    return handler.next(options);
+  }
+
+  static void onRequestPublicPortalInterceptor(
+      RequestOptions options, RequestInterceptorHandler handler) async {
+    // options.headers['Content-type'] = 'application/json';
+    options.queryParameters['serviceKey'] = FIXEDKEY.PUBLIC_DATA_PORTAL;
+    options.queryParameters['returnType'] = 'JSON';
     print('Request API----------------------------------------------Begin!!!');
     print('path         : ${options.baseUrl}${options.path}');
     print('body         : ${innerParser(options.data)}');

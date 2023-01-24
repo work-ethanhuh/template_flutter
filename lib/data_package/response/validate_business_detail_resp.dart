@@ -32,7 +32,7 @@ class ValidateBusinessDetailRESP_data_status {
       _$ValidateBusinessDetailRESP_data_statusToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class ValidateBusinessDetailRESP_data {
   String? b_no;
   String? valid;
@@ -49,12 +49,12 @@ class ValidateBusinessDetailRESP_data {
       _$ValidateBusinessDetailRESP_dataToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class ValidateBusinessDetailRESP {
   int? request_cnt;
   int? valid_cnt;
   String? status_code;
-  ValidateBusinessDetailRESP_data? data;
+  List<ValidateBusinessDetailRESP_data>? data;
 
   ValidateBusinessDetailRESP({
     this.valid_cnt,
