@@ -58,26 +58,25 @@ class LoginState extends State<Login> {
                     currentWidth,
                     100),
                 UIH().cDis.divider_H(70.0),
-                InkWell(
-                  onTap: () {
-                    googleLogin().then((v) {
-                      print(v);
-                      if (v != null) {
-                        print('Google Login Success!!!!');
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DashBoard()));
-                      } else {
-                        print('Google Login Fail!!!!');
-                      }
-                    });
-                  },
-                  child: UIH()
-                      .cBox
-                      .rounded(UIH().cTex.text('Google', 10), currentWidth, 40),
-                ),
-                if (Platform.isIOS) UIH().cDis.divider_H(10.0),
+                if (Platform.isAndroid)
+                  InkWell(
+                    onTap: () {
+                      googleLogin().then((v) {
+                        print(v);
+                        if (v != null) {
+                          print('Google Login Success!!!!');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DashBoard()));
+                        } else {
+                          print('Google Login Fail!!!!');
+                        }
+                      });
+                    },
+                    child: UIH().cBox.rounded(
+                        UIH().cTex.text('Google', 10), currentWidth, 40),
+                  ),
                 if (Platform.isIOS)
                   InkWell(
                     onTap: () {
@@ -97,15 +96,6 @@ class LoginState extends State<Login> {
                     child: UIH().cBox.rounded(
                         UIH().cTex.text('Apple', 10), currentWidth, 40),
                   ),
-                // UIH().cDis.divider_H(10.0),
-                // InkWell(
-                //   onTap: () {
-                //     loginSequence();
-                //   },
-                //   child: UIH()
-                //       .cBox
-                //       .rounded(UIH().cTex.text('Kakao', 10), currentWidth, 40),
-                // ),
                 UIH().cDis.divider_H(30.0),
               ],
             ),
