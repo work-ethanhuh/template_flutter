@@ -245,6 +245,11 @@ class Exam2State extends State<Exam2> {
       startDate.text = '20080530';
       ownerName.text = '강창석';
       companyName.text = '(주)미리디';
+
+      print('registrationNumber : $registrationNumber');
+      print('startDate.text : ${startDate.text}');
+      print('ownerName.text : ${ownerName.text}');
+      print('companyName.text : ${companyName.text}');
     }
 
     if (registrationNumber_sta.text.isEmpty &&
@@ -288,7 +293,7 @@ class Exam2State extends State<Exam2> {
         print('status_code : ${v.status_code}');
         print('data : ${v.data!.length}');
         for (var iterator in v.data!) {
-          print('b_no               : ${iterator.status!.b_no}');
+          print('b_no               : ${iterator.status?.b_no}');
           print('b_stt              : ${iterator.status?.b_stt}');
           print('b_stt_cd           : ${iterator.status?.b_stt_cd}');
           print('tax_type           : ${iterator.status?.tax_type}');
@@ -298,7 +303,53 @@ class Exam2State extends State<Exam2> {
           print('tax_type_change_dt : ${iterator.status?.tax_type_change_dt}');
           print('invoice_apply_dt   : ${iterator.status?.invoice_apply_dt}');
         }
+        startDate.clear();
+        ownerName.clear();
+        companyName.clear();
+        resultBottomSheet(v);
       }
     });
+  }
+
+  resultBottomSheet(ValidateBusinessDetailRESP res) {
+    return showModalBottomSheet(
+        context: context,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        builder: (BuildContext context) {
+          return Container(
+            height: 200,
+            color: Colors.transparent,
+            child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  UIH()
+                      .cTex
+                      .text('사업자등록번호 : ${res.data![0].status!.b_no!}', 13),
+                  UIH().cTex.text('납세자상태 : ${res.data![0].status!.b_stt!}', 13),
+                  UIH()
+                      .cTex
+                      .text('납세자상태코드 : ${res.data![0].status!.b_stt_cd!}', 13),
+                  UIH()
+                      .cTex
+                      .text('과제유형메시지 : ${res.data![0].status!.tax_type!}', 13),
+                  UIH().cTex.text(
+                      '과제유형코드 : ${res.data![0].status!.tax_type_cd!}', 13),
+                  UIH().cTex.text('폐업일 : ${res.data![0].status!.end_dt!}', 13),
+                  UIH().cTex.text(
+                      '단위과세전환폐업여부 : ${res.data![0].status!.utcc_yn!}', 13),
+                  UIH().cTex.text(
+                      '최근과세유형전환일자 : ${res.data![0].status!.tax_type_change_dt!}',
+                      13),
+                  UIH().cTex.text(
+                      '세금계산서적용일자 : ${res.data![0].status!.invoice_apply_dt!}',
+                      13),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }
