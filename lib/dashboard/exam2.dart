@@ -61,10 +61,34 @@ class Exam2State extends State<Exam2> {
             child: Column(
               children: [
                 UIH().cBox.box_H(
-                    UIH().cTex.weightText(
-                        'Public Data Portal API', 20, FontWeight.w400),
+                    Stack(
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          child: UIH().cTex.weightText(
+                              'Public Data Portal API', 20, FontWeight.w400),
+                        ),
+                        Container(
+                          alignment: Alignment.centerRight,
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                registrationNumber_sta.clear();
+                                registrationNumber_mid.clear();
+                                registrationNumber_end.clear();
+                                startDate.clear();
+                                ownerName.clear();
+                                companyName.clear();
+                              });
+                            },
+                            child: Icon(Icons.refresh),
+                          ),
+                        ),
+                      ],
+                    ),
                     currentWidth,
                     60),
+
                 // UIH().cBox.box(UIH().cTex.text('$login_info', 10), currentWidth),
 
                 UIH().cBox.rounded(
@@ -136,7 +160,7 @@ class Exam2State extends State<Exam2> {
                             child: Padding(
                               padding: EdgeInsets.only(left: 10, right: 10),
                               child: TextField(
-                                controller: registrationNumber_sta,
+                                controller: startDate,
                                 maxLength: 8,
                                 keyboardType: TextInputType.number,
                                 style: TextStyle(color: Colors.white),
@@ -166,7 +190,7 @@ class Exam2State extends State<Exam2> {
                             child: Padding(
                               padding: EdgeInsets.only(left: 10, right: 10),
                               child: TextField(
-                                controller: registrationNumber_sta,
+                                controller: ownerName,
                                 maxLength: 10,
                                 keyboardType: TextInputType.text,
                                 style: TextStyle(color: Colors.white),
@@ -197,7 +221,7 @@ class Exam2State extends State<Exam2> {
                             child: Padding(
                               padding: EdgeInsets.only(left: 10, right: 10),
                               child: TextField(
-                                controller: registrationNumber_sta,
+                                controller: companyName,
                                 maxLength: 10,
                                 keyboardType: TextInputType.text,
                                 style: TextStyle(color: Colors.white),
@@ -303,9 +327,15 @@ class Exam2State extends State<Exam2> {
           print('tax_type_change_dt : ${iterator.status?.tax_type_change_dt}');
           print('invoice_apply_dt   : ${iterator.status?.invoice_apply_dt}');
         }
-        startDate.clear();
-        ownerName.clear();
-        companyName.clear();
+        setState(() {
+          registrationNumber_sta.clear();
+          registrationNumber_mid.clear();
+          registrationNumber_end.clear();
+          startDate.clear();
+          ownerName.clear();
+          companyName.clear();
+        });
+
         resultBottomSheet(v);
       }
     });
