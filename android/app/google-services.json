@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "975438024042-of59hkruaiuj5p0amn59leflvddq52ke.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.upto.template_flutter",
+            "certificate_hash": "1279ebc8e4c0ad2835dd166531d2f62841fae999"
+          }
+        },
+        {
           "client_id": "975438024042-5qlirpbp7usht457vbnjbhco5o1h05bb.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -39,10 +47,11 @@
               "client_type": 3
             },
             {
-              "client_id": "975438024042-aabqfcrn5o98pupqud8g7qd5fs5td3iq.apps.googleusercontent.com",
+              "client_id": "975438024042-943ubgve1f374m6uuqvirfrrjb9fullq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.upto.templateFlutter"
+                "bundle_id": "com.upto.templateFlutter",
+                "app_store_id": "1667140229"
               }
             }
           ]
