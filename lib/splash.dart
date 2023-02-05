@@ -1,7 +1,11 @@
 import 'dart:async';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:template_flutter/login.dart';
+
+import 'common/cv.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -14,9 +18,18 @@ class SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
+    initSequence();
     Timer(const Duration(milliseconds: 3000), () {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Login()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+    });
+  }
+
+  initSequence() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await FirebaseMessaging.instance.getToken().then((v) {
+        print('FCM-Token : $v');
+        Provider.of<CV>(context, listen: false).FCM_Token = v.toString();
+      });
     });
   }
 
