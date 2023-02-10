@@ -18,8 +18,8 @@ class SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    initSequence();
     Timer(const Duration(milliseconds: 3000), () {
+      initSequence();
       Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
     });
   }

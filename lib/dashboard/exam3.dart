@@ -15,6 +15,15 @@ class Exam3State extends State<Exam3> {
   @override
   void initState() {
     super.initState();
+    initialSequence();
+  }
+
+  initialSequence() async {}
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
@@ -25,7 +34,20 @@ class Exam3State extends State<Exam3> {
         child: Column(
           children: [
             UIH().cTex.weightText('FCM-Token Test', 20, FontWeight.w400),
-            Text('${context.read<CV>().FCM_Token}'),
+            // ignore: unnecessary_string_interpolations
+            UIH().cBox.box(
+                  Container(
+                    child: Text('${context.read<CV>().FCM_Token}'),
+                  ),
+                  MediaQuery.of(context).size.width,
+                ),
+            UIH().cDis.divider_H(20.0),
+            Expanded(
+              child: UIH().cBox.box(
+                    Text('aaaa'),
+                    MediaQuery.of(context).size.width,
+                  ),
+            ),
           ],
         ),
       ),
