@@ -44,6 +44,7 @@ void main() {
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  UTH().loadPrefs();
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(
