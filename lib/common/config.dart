@@ -1,7 +1,6 @@
 class DefinedAPI {
   static const PUBLIC_DATA_PORTAL = "http://api.odcloud.kr/api";
-  static const FCM =
-      "https://fcm.googleapis.com/v1/projects/template-flutter-27e96";
+  static const FCM = "https://fcm.googleapis.com";
 }
 
 class SPKey {
@@ -9,14 +8,8 @@ class SPKey {
 }
 
 class ReceivedNotification {
-  ReceivedNotification(
-      {required this.id,
-      required this.title,
-      required this.body,
-      required this.payload});
+  ReceivedNotification({required this.title, required this.body});
 
-  final int id;
   final String? title;
   final String? body;
-  final String? payload;
 }

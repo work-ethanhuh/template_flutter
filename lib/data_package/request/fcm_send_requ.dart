@@ -62,11 +62,15 @@ class FCMSendREQU_message_notification {
 
 @JsonSerializable()
 class FCMSendREQU_message {
-  String? token;
+  String? to;
+  int? time_to_live;
+  bool? delay_while_idle;
   FCMSendREQU_message_notification notification;
 
   FCMSendREQU_message({
-    required this.token,
+    required this.to,
+    required this.time_to_live,
+    required this.delay_while_idle,
     required this.notification,
   });
 

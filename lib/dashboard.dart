@@ -46,16 +46,28 @@ class DashBoardState extends State<DashBoard> with TickerProviderStateMixin {
           title: Text('Exam ${_currentIndex + 1}'),
           actions: [],
         ),
-        body: selectTab(),
-        bottomNavigationBar: BottomNavigationBar(
-          items: _items,
-          onTap: (v) {
-            setState(() {
-              _currentIndex = v;
-            });
-          },
-          currentIndex: _currentIndex,
-          selectedItemColor: Colors.blue,
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: selectTab(),
+              ),
+              Container(
+                height: 56,
+                child: BottomNavigationBar(
+                  elevation: 0,
+                  items: _items,
+                  onTap: (v) {
+                    setState(() {
+                      _currentIndex = v;
+                    });
+                  },
+                  currentIndex: _currentIndex,
+                  selectedItemColor: Colors.blue,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -78,8 +78,8 @@ abstract class BasicClient {
 
   static void onRequestFCMInterceptor(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    String? fcmKey = await UTH().getString(SPKey.FCM_KEY);
-    options.headers['Authorization'] = 'Bearer $fcmKey';
+    String? fcmKey = UTH().getString(SPKey.FCM_KEY);
+    options.headers['Authorization'] = 'key=${FIXEDKEY.CLOUD_MESSAGING}';
     print('Request API----------------------------------------------Begin!!!');
     print('path         : ${options.baseUrl}${options.path}');
     print('body         : ${innerParser(options.data)}');

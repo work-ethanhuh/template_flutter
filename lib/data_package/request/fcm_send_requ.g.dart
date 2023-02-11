@@ -60,7 +60,9 @@ Map<String, dynamic> _$FCMSendREQU_message_notificationToJson(
 
 FCMSendREQU_message _$FCMSendREQU_messageFromJson(Map<String, dynamic> json) =>
     FCMSendREQU_message(
-      token: json['token'] as String?,
+      to: json['to'] as String?,
+      time_to_live: json['time_to_live'] as int?,
+      delay_while_idle: json['delay_while_idle'] as bool?,
       notification: FCMSendREQU_message_notification.fromJson(
           json['notification'] as Map<String, dynamic>),
     );
@@ -68,7 +70,9 @@ FCMSendREQU_message _$FCMSendREQU_messageFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$FCMSendREQU_messageToJson(
         FCMSendREQU_message instance) =>
     <String, dynamic>{
-      'token': instance.token,
+      'to': instance.to,
+      'time_to_live': instance.time_to_live,
+      'delay_while_idle': instance.delay_while_idle,
       'notification': instance.notification,
     };
 

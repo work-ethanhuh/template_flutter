@@ -13,7 +13,7 @@ class _FCMClient implements FCMClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://fcm.googleapis.com/v1/projects/template-flutter-27e96';
+    baseUrl ??= 'https://fcm.googleapis.com';
   }
 
   final Dio _dio;
@@ -34,7 +34,7 @@ class _FCMClient implements FCMClient {
     )
         .compose(
           _dio.options,
-          '/messages:send',
+          '/fcm/send',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -57,7 +57,7 @@ class _FCMClient implements FCMClient {
     )
         .compose(
           _dio.options,
-          '/messages:send',
+          '/fcm/send',
           queryParameters: queryParameters,
           data: _data,
         )

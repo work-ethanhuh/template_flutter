@@ -9,9 +9,9 @@ part 'fcm_client.g.dart';
 abstract class FCMClient {
   factory FCMClient(Dio FCM, {String baseUrl}) = _FCMClient;
 
-  @POST('/messages:send')
+  @POST('/fcm/send')
   Future<dynamic> sendPushMessageAOS(@Body() FCMSendREQU_AOS body);
 
-  @POST('/messages:send')
+  @POST('/fcm/send')
   Future<dynamic> sendPushMessageIOS(@Body() FCMSendREQU_IOS body);
 }
