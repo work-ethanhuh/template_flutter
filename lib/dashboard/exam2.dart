@@ -89,7 +89,7 @@ class Exam2State extends State<Exam2> {
 
                 // UIH().cBox.box(UIH().cTex.text('$login_info', 10), currentWidth),
 
-                UIH().cBox.rounded(
+                UIH().cBox.rounded_H(
                     Padding(
                       padding: EdgeInsets.only(left: 10, right: 10),
                       child: Row(
@@ -145,7 +145,7 @@ class Exam2State extends State<Exam2> {
                     ),
                     currentWidth,
                     80),
-                UIH().cBox.rounded(
+                UIH().cBox.rounded_H(
                     Padding(
                       padding: EdgeInsets.only(left: 10, right: 10),
                       child: Row(
@@ -175,7 +175,7 @@ class Exam2State extends State<Exam2> {
                     ),
                     currentWidth,
                     80),
-                UIH().cBox.rounded(
+                UIH().cBox.rounded_H(
                     Padding(
                       padding: EdgeInsets.only(left: 10, right: 10),
                       child: Row(
@@ -206,7 +206,7 @@ class Exam2State extends State<Exam2> {
                     currentWidth,
                     80),
 
-                UIH().cBox.rounded(
+                UIH().cBox.rounded_H(
                     Padding(
                       padding: EdgeInsets.only(left: 10, right: 10),
                       child: Row(
@@ -240,7 +240,7 @@ class Exam2State extends State<Exam2> {
                   onTap: () {
                     checkValidation();
                   },
-                  child: UIH().cBox.rounded(
+                  child: UIH().cBox.rounded_H(
                       UIH()
                           .cTex
                           .colorText('Check Validation', 20, Colors.white),

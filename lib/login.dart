@@ -74,7 +74,7 @@ class LoginState extends State<Login> {
                         }
                       });
                     },
-                    child: UIH().cBox.rounded(
+                    child: UIH().cBox.rounded_H(
                         UIH().cTex.text('Google', 10), currentWidth, 40),
                   ),
                 if (Platform.isIOS)
@@ -93,7 +93,7 @@ class LoginState extends State<Login> {
                         }
                       });
                     },
-                    child: UIH().cBox.rounded(
+                    child: UIH().cBox.rounded_H(
                         UIH().cTex.text('Apple', 10), currentWidth, 40),
                   ),
                 UIH().cDis.divider_H(30.0),

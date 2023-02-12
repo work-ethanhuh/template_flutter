@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -33,7 +34,9 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print('Message body  : ${message.notification!.body}');
   ReceivedNotification rn = ReceivedNotification(
       title: message.notification!.title, body: message.notification!.body);
-  showFlutterNotification(message);
+  if (!Platform.isAndroid) {
+    showFlutterNotification(message);
+  }
 }
 
 void showFlutterNotification(RemoteMessage message) {

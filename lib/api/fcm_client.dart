@@ -10,8 +10,5 @@ abstract class FCMClient {
   factory FCMClient(Dio FCM, {String baseUrl}) = _FCMClient;
 
   @POST('/fcm/send')
-  Future<dynamic> sendPushMessageAOS(@Body() FCMSendREQU_AOS body);
-
-  @POST('/fcm/send')
-  Future<dynamic> sendPushMessageIOS(@Body() FCMSendREQU_IOS body);
+  Future<dynamic> sendPushMessage(@Body() FCMSendREQU body);
 }

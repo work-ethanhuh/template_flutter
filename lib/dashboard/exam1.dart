@@ -37,23 +37,28 @@ class Exam1State extends State<Exam1> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              UIH().cBox.box_H(UIH().cTex.weightText('Login Infomation', 20, FontWeight.w400), currentWidth, 60),
+              UIH().cBox.box_H(
+                  UIH()
+                      .cTex
+                      .weightText('Login Infomation', 20, FontWeight.w400),
+                  currentWidth,
+                  60),
               UIH().cBox.box(UIH().cTex.text('$login_info', 10), currentWidth),
               UIH().cDis.divider_H(30),
               InkWell(
                 onTap: () {
                   FirebaseAuth.instance.signOut().then((v) {
-                    GoogleSignIn().signOut().then((v1){
+                    GoogleSignIn().signOut().then((v1) {
                       print('Logout Success!!!!');
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => Login()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Login()));
                     });
-
                   });
                 },
-                child: UIH().cBox.rounded(
-                    UIH().cTex.colorText('Logout', 20, Colors.white), currentWidth, 40
-                ),
+                child: UIH().cBox.rounded_H(
+                    UIH().cTex.colorText('Logout', 20, Colors.white),
+                    currentWidth,
+                    40),
               ),
             ],
           ),
@@ -62,7 +67,5 @@ class Exam1State extends State<Exam1> {
     );
   }
 
-  logout() {
-
-  }
+  logout() {}
 }

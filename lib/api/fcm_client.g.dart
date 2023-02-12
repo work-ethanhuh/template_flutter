@@ -21,30 +21,7 @@ class _FCMClient implements FCMClient {
   String? baseUrl;
 
   @override
-  Future<dynamic> sendPushMessageAOS(body) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
-    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/fcm/send',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
-    return value;
-  }
-
-  @override
-  Future<dynamic> sendPushMessageIOS(body) async {
+  Future<dynamic> sendPushMessage(body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

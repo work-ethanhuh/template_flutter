@@ -67,7 +67,7 @@ class Exam3State extends State<Exam3> {
                   padding: const EdgeInsets.only(left: 30),
                   child: UIH().cTex.text('Title', 15),
                 ),
-                UIH().cBox.rounded(
+                UIH().cBox.rounded_H(
                     Padding(
                       padding: const EdgeInsets.only(left: 10, right: 10),
                       child: TextField(
@@ -89,7 +89,7 @@ class Exam3State extends State<Exam3> {
                   padding: const EdgeInsets.only(left: 30),
                   child: UIH().cTex.text('Body', 15),
                 ),
-                UIH().cBox.rounded(
+                UIH().cBox.rounded_H(
                     Padding(
                       padding: const EdgeInsets.only(left: 10, right: 10),
                       child: TextField(
@@ -106,18 +106,23 @@ class Exam3State extends State<Exam3> {
                     ),
                     MediaQuery.of(context).size.width,
                     80),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.only(left: 30),
-                  child: UIH().cTex.text(
-                      'Message Count +${context.read<CV>().list_FCM.length}',
-                      15),
-                ),
                 Expanded(
-                  child: UIH().cBox.box(
-                        ListView.builder(
+                  child: InkWell(
+                    onTap: () {
+                      if (context.read<CV>().list_FCM.length <= 0 ||
+                          context.read<CV>().list_FCM.length == null) {
+                        UIH().cDis.toast('Empty FCM List');
+                        return;
+                      }
+                      var dialogWidth = MediaQuery.of(context).size.width * 0.6;
+                      var dialogHeight =
+                          MediaQuery.of(context).size.height * 0.4;
+                      print('width : $dialogWidth');
+                      print('height : $dialogHeight');
+                      UIH().cDis.dialog(context, dialogWidth, dialogHeight,
+                          inBody: ListView.builder(
                             controller: scrollController,
-                            itemCount: context.watch<CV>().list_FCM.length,
+                            itemCount: context.read<CV>().list_FCM.length,
                             itemBuilder: ((context, index) {
                               return UIH().cBox.roundedPadding(
                                   Column(
@@ -129,76 +134,74 @@ class Exam3State extends State<Exam3> {
                                           '${context.read<CV>().list_FCM.elementAt(index).body}'),
                                     ],
                                   ),
-                                  MediaQuery.of(context).size.width,
+                                  dialogWidth - 50,
                                   80,
                                   5);
-                            })),
-                        MediaQuery.of(context).size.width,
-                      ),
+                            }),
+                          ));
+                    },
+                    child: UIH().cBox.rounded(
+                          UIH().cTex.weightText(
+                              'Check FCM Stack', 15, FontWeight.w300),
+                          // ListView.builder(
+                          //     controller: scrollController,
+                          //     itemCount: context.watch<CV>().list_FCM.length,
+                          //     itemBuilder: ((context, index) {
+                          //       return UIH().cBox.roundedPadding(
+                          //           Column(
+                          //             mainAxisAlignment: MainAxisAlignment.center,
+                          //             children: [
+                          //               Text(
+                          //                   '${context.read<CV>().list_FCM.elementAt(index).title}'),
+                          //               Text(
+                          //                   '${context.read<CV>().list_FCM.elementAt(index).body}'),
+                          //             ],
+                          //           ),
+                          //           MediaQuery.of(context).size.width,
+                          //           80,
+                          //           5);
+                          //     })),
+                          MediaQuery.of(context).size.width,
+                        ),
+                  ),
                 ),
                 InkWell(
                   onTap: () {
-                    // final request = FCMClient(BasicClient.FCM);
-                    // FCMSendREQU_message_notification sendREQU_message_notification =
-                    //     FCMSendREQU_message_notification(
-                    //         title: 'test title', body: 'test body');
-                    // FCMSendREQU_message sendREQU_message = FCMSendREQU_message(
-                    //     notification: sendREQU_message_notification,
-                    //     to: context.read<CV>().FCM_Token,
-                    //     time_to_live: 0,
-                    //     delay_while_idle: true);
-                    // FCMSendREQU_AOS sendREQU_AOS =
-                    //     FCMSendREQU_AOS(message: sendREQU_message);
-
-                    var encode = jsonEncode(<String, dynamic>{
-                      'to': context.read<CV>().FCM_Token,
-                      'notification': <String, dynamic>{
-                        'title': textEditingController_title.text,
-                        'body': textEditingController_body.text,
-                        "content_available": true,
-                        "mutable_content": true,
-                      },
-                    });
-                    var url = DefinedAPI.FCM + '/fcm/send';
-                    print(url);
-                    print(FIXEDKEY.CLOUD_MESSAGING);
-                    print('encode : $encode');
-                    Timer(Duration(seconds: 5), () async {
-                      try {
-                        http.Response response = await http.post(
-                          Uri.parse(url),
-                          headers: <String, String>{
-                            'Content-Type': 'application/json',
-                            'Authorization': 'key=${FIXEDKEY.CLOUD_MESSAGING}',
-                          },
-                          body: encode,
-                        );
-
-                        int statusCode = response.statusCode;
-                        if (statusCode == 200) {
-                          print('success');
-                          print(response.body);
-                          messageCount++;
-                          setState(() {
-                            textEditingController_title.text =
-                                'test title $messageCount';
-                            textEditingController_body.text =
-                                'test body $messageCount';
-                          });
-                        } else {
-                          print('fail');
-                          print(response.statusCode);
-                        }
-                      } catch (e) {
-                        print('error : $e');
-                      }
-                    });
-
-                    // request.sendPushMessageAOS(sendREQU_AOS).then((value) {
-                    //   print(value.toString());
+                    // var encode = jsonEncode(<String, dynamic>{
+                    //   'to': context.read<CV>().FCM_Token,
+                    //   'notification': <String, dynamic>{
+                    //     'title': textEditingController_title.text,
+                    //     'body': textEditingController_body.text,
+                    //     "content_available": true,
+                    //     "mutable_content": true,
+                    //   },
                     // });
+                    // var url = DefinedAPI.FCM + '/fcm/send';
+                    // print(url);
+                    // print(FIXEDKEY.CLOUD_MESSAGING);
+                    // print('encode : $encode');
+
+                    final request = FCMClient(BasicClient.FCM);
+                    FCMSendREQU_notification sendREQU_notification =
+                        FCMSendREQU_notification(
+                            title: textEditingController_title.text,
+                            body: textEditingController_body.text);
+                    FCMSendREQU sendREQU = FCMSendREQU(
+                        to: context.read<CV>().FCM_Token,
+                        notification: sendREQU_notification);
+                    request.sendPushMessage(sendREQU).then((v) {
+                      print('success');
+
+                      messageCount++;
+                      setState(() {
+                        textEditingController_title.text =
+                            'test title $messageCount';
+                        textEditingController_body.text =
+                            'test body $messageCount';
+                      });
+                    });
                   },
-                  child: UIH().cBox.rounded(
+                  child: UIH().cBox.rounded_H(
                       UIH()
                           .cTex
                           .colorText('Send Cloud Messaging', 20, Colors.white),
