@@ -167,7 +167,10 @@ class Exam3State extends State<Exam3> {
                     // print(url);
                     // print(FIXEDKEY.CLOUD_MESSAGING);
                     // print('encode : $encode');
-
+                    if (sendingNow) {
+                      UIH().cDis.toast('Sending...');
+                      return;
+                    }
                     final request = FCMClient(BasicClient.FCM);
                     FCMSendREQU_notification sendREQU_notification =
                         FCMSendREQU_notification(

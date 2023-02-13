@@ -39,6 +39,9 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   if (!Platform.isAndroid) {
     showFlutterNotification(message);
   }
+  // important note *******************************************
+  // The app's current resources and memory cannot be shared while in the background. So, it need to write to the external storage (internal memory) and load it by adding it at the time the app starts. But it's possible, but I'm not bothered by it.
+  // important note *******************************************
 }
 
 void showFlutterNotification(RemoteMessage message) {
