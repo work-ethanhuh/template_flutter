@@ -76,29 +76,38 @@ class Splash extends StatefulWidget {
 class SplashState extends State<Splash> {
   bool autoLoginCheck = false;
   bool goDirection = false;
+  StreamSubscription? authStateCheck;
+
   @override
   void initState() {
     super.initState();
     Timer(const Duration(milliseconds: 3000), () {
       initSequence();
-      FirebaseAuth.instance.authStateChanges().listen((event) {
+      StreamSubscription authStateCheck =
+          FirebaseAuth.instance.authStateChanges().listen((event) {
         autoLoginCheck = true;
-        if (event != null) {
-          setState(() {
-            goDirection = true;
-          });
-          Timer(const Duration(milliseconds: 1000), () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => DashBoard()));
-          });
-        } else {
+        if (event == null) {
           setState(() {
             goDirection = false;
           });
-          Timer(const Duration(milliseconds: 1000), () {
+        } else {
+          setState(() {
+            goDirection = true;
+          });
+        }
+      });
+      Timer(const Duration(milliseconds: 1000), () {
+        authStateCheck!.cancel();
+        if (autoLoginCheck) {
+          if (goDirection) {
+            print('go to Dashboard');
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => DashBoard()));
+          } else {
+            print('go to Login');
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Login()));
-          });
+          }
         }
       });
     });

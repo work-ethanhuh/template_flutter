@@ -50,8 +50,7 @@ class Exam1State extends State<Exam1> {
                   FirebaseAuth.instance.signOut().then((v) {
                     GoogleSignIn().signOut().then((v1) {
                       print('Logout Success!!!!');
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Login()));
+                      Navigator.pop(context);
                     });
                   });
                 },

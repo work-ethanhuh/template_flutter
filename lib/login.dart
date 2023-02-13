@@ -43,59 +43,65 @@ class LoginState extends State<Login> {
         ),
       );
     } else {
-      return Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                UIH().cDis.divider_H(10.0),
-                UIH().cBox.box_H(
-                    UIH().cTex.weightText('Login', 40, FontWeight.w400),
-                    currentWidth,
-                    100),
-                UIH().cDis.divider_H(70.0),
-                if (Platform.isAndroid)
-                  InkWell(
-                    onTap: () {
-                      googleLogin().then((v) {
-                        print(v);
-                        if (v != null) {
-                          print('Google Login Success!!!!');
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DashBoard()));
-                        } else {
-                          print('Google Login Fail!!!!');
-                        }
-                      });
-                    },
-                    child: UIH().cBox.rounded_H(
-                        UIH().cTex.text('Google', 10), currentWidth, 40),
-                  ),
-                if (Platform.isIOS)
-                  InkWell(
-                    onTap: () {
-                      appleLogin().then((v) {
-                        print(v);
-                        if (v != null) {
-                          print('Apple Login Success!!!!');
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DashBoard()));
-                        } else {
-                          print('Apple Login Fail!!!!');
-                        }
-                      });
-                    },
-                    child: UIH().cBox.rounded_H(
-                        UIH().cTex.text('Apple', 10), currentWidth, 40),
-                  ),
-                UIH().cDis.divider_H(30.0),
-              ],
+      return WillPopScope(
+        onWillPop: () {
+          return Future.value(false);
+        },
+        // ignore: prefer_const_constructors
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: SafeArea(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  UIH().cDis.divider_H(10.0),
+                  UIH().cBox.box_H(
+                      UIH().cTex.weightText('Login', 40, FontWeight.w400),
+                      currentWidth,
+                      100),
+                  UIH().cDis.divider_H(70.0),
+                  if (Platform.isAndroid)
+                    InkWell(
+                      onTap: () {
+                        googleLogin().then((v) {
+                          print(v);
+                          if (v != null) {
+                            print('Google Login Success!!!!');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DashBoard()));
+                          } else {
+                            print('Google Login Fail!!!!');
+                          }
+                        });
+                      },
+                      child: UIH().cBox.rounded_H(
+                          UIH().cTex.text('Google', 10), currentWidth, 40),
+                    ),
+                  if (Platform.isIOS)
+                    InkWell(
+                      onTap: () {
+                        appleLogin().then((v) {
+                          print(v);
+                          if (v != null) {
+                            print('Apple Login Success!!!!');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DashBoard()));
+                          } else {
+                            print('Apple Login Fail!!!!');
+                          }
+                        });
+                      },
+                      child: UIH().cBox.rounded_H(
+                          UIH().cTex.text('Apple', 10), currentWidth, 40),
+                    ),
+                  UIH().cDis.divider_H(30.0),
+                ],
+              ),
             ),
           ),
         ),
