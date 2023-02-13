@@ -1,12 +1,15 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:template_flutter/common/config.dart';
+import 'package:template_flutter/dashboard.dart';
 import 'package:template_flutter/login.dart';
 import 'package:template_flutter/util/util_helper.dart';
 
@@ -69,12 +72,35 @@ class Splash extends StatefulWidget {
 }
 
 class SplashState extends State<Splash> {
+  bool autoLoginCheck = false;
+  bool goDirection = false;
   @override
   void initState() {
     super.initState();
     Timer(const Duration(milliseconds: 3000), () {
       initSequence();
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+      FirebaseAuth.instance.authStateChanges().listen((event) {
+        autoLoginCheck = true;
+        if (event != null) {
+          setState(() {
+            goDirection = true;
+          });
+
+          GoogleSignIn().signIn();
+          Timer(const Duration(milliseconds: 1000), () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => DashBoard()));
+          });
+        } else {
+          setState(() {
+            goDirection = false;
+          });
+          Timer(const Duration(milliseconds: 1000), () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Login()));
+          });
+        }
+      });
     });
   }
 
@@ -86,11 +112,6 @@ class SplashState extends State<Splash> {
           .resolvePlatformSpecificImplementation<
               AndroidFlutterLocalNotificationsPlugin>()
           ?.createNotificationChannel(channel);
-      await FirebaseMessaging.instance.getToken().then((v) {
-        print('FCM-Token : $v');
-        Provider.of<CV>(context, listen: false).FCM_Token = v.toString();
-        UTH().setString(SPKey.FCM_KEY, v.toString());
-      });
       await FirebaseMessaging.instance.setAutoInitEnabled(true);
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
         print('Got a message whilst in the foreground!');
@@ -108,6 +129,11 @@ class SplashState extends State<Splash> {
           showFlutterNotification(message);
         }
       });
+      await FirebaseMessaging.instance.getToken().then((v) {
+        print('FCM-Token : $v');
+        Provider.of<CV>(context, listen: false).FCM_Token = v.toString();
+        UTH().setString(SPKey.FCM_KEY, v.toString());
+      });
     });
   }
 
@@ -121,7 +147,11 @@ class SplashState extends State<Splash> {
       child: Scaffold(
         // ignore: prefer_const_constructors
         body: Center(
-          child: Text('스플레시'),
+          child: Text(goDirection
+              ? 'Complete : Go to Dashboard'
+              : autoLoginCheck
+                  ? 'Not Login : Go to Login Process'
+                  : 'Checking Automatic Login '),
         ),
       ),
     );

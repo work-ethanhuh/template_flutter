@@ -3,9 +3,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:provider/provider.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:template_flutter/common/cv.dart';
 import 'package:template_flutter/dashboard.dart';
 import 'package:template_flutter/util/ui_helper.dart';
 
