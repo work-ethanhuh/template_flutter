@@ -1,16 +1,19 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:template_flutter/api/basic_client.dart';
 import 'package:template_flutter/api/fcm_client.dart';
-import 'package:template_flutter/api/fixed_key.dart';
-import 'package:template_flutter/common/config.dart';
+
 import 'package:template_flutter/common/cv.dart';
 import 'package:template_flutter/data_package/request/fcm_send_requ.dart';
 import 'package:template_flutter/util/ui_helper.dart';
-import 'package:http/http.dart' as http;
+
+// For http sending test
+// import 'dart:convert';
+// import 'package:template_flutter/api/fixed_key.dart';
+// import 'package:template_flutter/common/config.dart';
+// import 'package:http/http.dart' as http;
 
 class Exam3 extends StatefulWidget {
   @override
@@ -24,6 +27,8 @@ class Exam3State extends State<Exam3> {
   TextEditingController textEditingController_body = TextEditingController();
   int messageCount = 0;
   ScrollController scrollController = ScrollController();
+  int sendingDelayTime = 3;
+  bool sendingNow = false;
   @override
   void initState() {
     super.initState();
@@ -143,24 +148,6 @@ class Exam3State extends State<Exam3> {
                     child: UIH().cBox.rounded(
                           UIH().cTex.weightText(
                               'Check FCM Stack', 15, FontWeight.w300),
-                          // ListView.builder(
-                          //     controller: scrollController,
-                          //     itemCount: context.watch<CV>().list_FCM.length,
-                          //     itemBuilder: ((context, index) {
-                          //       return UIH().cBox.roundedPadding(
-                          //           Column(
-                          //             mainAxisAlignment: MainAxisAlignment.center,
-                          //             children: [
-                          //               Text(
-                          //                   '${context.read<CV>().list_FCM.elementAt(index).title}'),
-                          //               Text(
-                          //                   '${context.read<CV>().list_FCM.elementAt(index).body}'),
-                          //             ],
-                          //           ),
-                          //           MediaQuery.of(context).size.width,
-                          //           80,
-                          //           5);
-                          //     })),
                           MediaQuery.of(context).size.width,
                         ),
                   ),
@@ -189,22 +176,40 @@ class Exam3State extends State<Exam3> {
                     FCMSendREQU sendREQU = FCMSendREQU(
                         to: context.read<CV>().FCM_Token,
                         notification: sendREQU_notification);
-                    request.sendPushMessage(sendREQU).then((v) {
-                      print('success');
+                    setState(() {
+                      sendingDelayTime = 3;
+                      sendingNow = true;
+                    });
+                    Timer.periodic(const Duration(seconds: 1), (timer) {
+                      if (sendingDelayTime == 0) {
+                        request.sendPushMessage(sendREQU).then((v) {
+                          print('success');
 
-                      messageCount++;
-                      setState(() {
-                        textEditingController_title.text =
-                            'test title $messageCount';
-                        textEditingController_body.text =
-                            'test body $messageCount';
-                      });
+                          messageCount++;
+                          setState(() {
+                            textEditingController_title.text =
+                                'test title $messageCount';
+                            textEditingController_body.text =
+                                'test body $messageCount';
+                            sendingNow = false;
+                          });
+                        });
+
+                        timer.cancel();
+                      } else {
+                        setState(() {
+                          sendingDelayTime--;
+                        });
+                      }
                     });
                   },
                   child: UIH().cBox.rounded_H(
-                      UIH()
-                          .cTex
-                          .colorText('Send Cloud Messaging', 20, Colors.white),
+                      UIH().cTex.colorText(
+                          sendingNow
+                              ? 'Preparing to Send... $sendingDelayTime'
+                              : 'Send Cloud Messaging',
+                          20,
+                          Colors.white),
                       MediaQuery.of(context).size.width,
                       40),
                 ),

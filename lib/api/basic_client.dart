@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:template_flutter/api/fixed_key.dart';
-import 'package:template_flutter/common/config.dart';
-import 'package:template_flutter/util/util_helper.dart';
 
 abstract class BasicClient {
   static final basic = Dio()
