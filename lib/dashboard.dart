@@ -3,18 +3,38 @@ import 'package:template_flutter/dashboard/exam1.dart';
 import 'package:template_flutter/dashboard/exam2.dart';
 import 'package:template_flutter/dashboard/exam3.dart';
 
-var _items = [
-  const BottomNavigationBarItem(
+List<BottomNavigationBarItem> _items = [
+  BottomNavigationBarItem(
     icon: Icon(Icons.home),
-    label: 'Exam1',
+    activeIcon: Icon(
+      Icons.check,
+      color: Colors.blue,
+    ),
+    label: 'Home',
   ),
-  const BottomNavigationBarItem(
+  BottomNavigationBarItem(
     icon: Icon(Icons.text_snippet),
+    activeIcon: Icon(
+      Icons.check,
+      color: Colors.blue,
+    ),
     label: 'Exam2',
   ),
-  const BottomNavigationBarItem(
-    icon: Icon(Icons.people),
+  BottomNavigationBarItem(
+    icon: Icon(Icons.text_snippet),
+    activeIcon: Icon(
+      Icons.check,
+      color: Colors.blue,
+    ),
     label: 'Exam3',
+  ),
+  BottomNavigationBarItem(
+    icon: Icon(Icons.text_snippet),
+    activeIcon: Icon(
+      Icons.check,
+      color: Colors.blue,
+    ),
+    label: 'Exam4',
   ),
 ];
 
@@ -53,17 +73,40 @@ class DashBoardState extends State<DashBoard> with TickerProviderStateMixin {
                 child: selectTab(),
               ),
               Container(
+                width: MediaQuery.of(context).size.width,
                 height: 56,
-                child: BottomNavigationBar(
-                  elevation: 0,
-                  items: _items,
-                  onTap: (v) {
-                    setState(() {
-                      _currentIndex = v;
-                    });
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: _items.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _currentIndex = index;
+                        });
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width / 4,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            _currentIndex == index
+                                ? _items[index].activeIcon
+                                : _items[index].icon,
+                            Text(
+                              _items[index].label.toString(),
+                              style: TextStyle(
+                                fontSize: 12.0,
+                                color: _currentIndex == index
+                                    ? Colors.blue
+                                    : Colors.grey,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
                   },
-                  currentIndex: _currentIndex,
-                  selectedItemColor: Colors.blue,
                 ),
               ),
             ],
@@ -87,6 +130,8 @@ class DashBoardState extends State<DashBoard> with TickerProviderStateMixin {
         {
           return Exam3();
         }
+      default:
+        return Exam1();
     }
   }
 }
