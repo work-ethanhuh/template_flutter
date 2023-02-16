@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:template_flutter/dashboard/exam1.dart';
 import 'package:template_flutter/dashboard/exam2.dart';
 import 'package:template_flutter/dashboard/exam3.dart';
+import 'package:template_flutter/dashboard/exam4.dart';
 
 List<BottomNavigationBarItem> _items = [
   BottomNavigationBarItem(
@@ -129,6 +130,10 @@ class DashBoardState extends State<DashBoard> with TickerProviderStateMixin {
       case 2:
         {
           return Exam3();
+        }
+      case 3:
+        {
+          return Exam4();
         }
       default:
         return Exam1();
